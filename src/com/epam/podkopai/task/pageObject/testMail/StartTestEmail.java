@@ -33,8 +33,6 @@ public class StartTestEmail {
         driver = new ChromeDriver();
     }
 
-    GmailHome gmailHome;
-
     @Test
     public void loginTest(){
         driver.get(gmail);

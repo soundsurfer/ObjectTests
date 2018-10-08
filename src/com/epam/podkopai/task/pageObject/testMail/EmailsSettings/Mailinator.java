@@ -18,7 +18,6 @@ public class Mailinator {
         }
     }
     private WebDriver driver;
-    //testemail1337@mailinator.com
 
     @FindBy(id = "inboxfield")
     private WebElement emailinator;
@@ -29,11 +28,14 @@ public class Mailinator {
     @FindBy(css = ".table")
     private WebElement emailTable;
 
-    @FindBy(xpath = "(//td[@onclick=\"showTheMessage('testemail1337-1538925857-5677859');\"])[3]")
+    @FindBy(css = "#row_testemail1337-1538992762-7082456 > .ng-binding:nth-child(4)")
     private WebElement showText;
 
-    @FindBy(css = "#msgpane > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)")
+    @FindBy(css = "body")
     private WebElement emailiText;
+
+    @FindBy(css = "#msg_body")
+    private WebElement msgFrame;
 
     public Mailinator(WebDriver driver){
         this.driver = driver;
@@ -46,8 +48,7 @@ public class Mailinator {
         Assert.assertTrue(emailTable.getText().contains(subjVerify));
         delay(2000);
         showText.click();
-        driver.switchTo().defaultContent();
-        driver.switchTo().frame(1);
+        driver.switchTo().frame(msgFrame);
         Assert.assertTrue(emailiText.getText().contains(subjText));
         delay(2000);
         return new Mailinator(driver);
